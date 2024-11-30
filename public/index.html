@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récapitulatif des Statistiques</title>
+    <link rel="stylesheet" href="cssIndex.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="summary-card">
+            <h1>Stats en vrac sur les 50 games</h1>
+            <div class="summary-info">
+                <p>Top 3 supports les plus joués :<br/> <span id="mostPlayedSupport"></span></p>
+                <p>ADC avec lequel il a remporté le plus de matchs : <span id="bestWinningADC"></span></p>
+                <p>Assistance moyenne du support le plus joué : <span id="averageAssistsMostPlayedSupport"></span></p>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <h2>Ratio Victoire/Défaite</h2>
+                <canvas id="winLossChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="chart-wrapper">
+                <h2>Support le plus joué</h2>
+                <canvas id="supportChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Bouton retour -->
+        <div class="back-button">
+            <a href="matches.html">Retour aux 50 derniers matchs</a>
+        </div>
+    </div>
+
+    <!-- Inclure le script Chart.js et un script personnalisé -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/frontend/src/stats.js"></script>
+
+</body>
+</html>

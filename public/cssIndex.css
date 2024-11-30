@@ -1,0 +1,185 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #07053a; /* Fond sombre */
+    color: #ffffff; /* Texte clair */
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Cartes de résumé */
+.summary-card {
+    background-color: #1e1e2f; /* Fond sombre */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.summary-card h1 {
+    color: #f0f0f0;
+    text-align: center;
+}
+
+/* Conteneur de graphiques */
+.charts-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #1e1e2f;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    justify-content: space-around;
+}
+
+
+.chart-wrapper {
+    width: 100%;
+    max-width: 500px; /* Largeur maximale ajustée pour un meilleur équilibre visuel */
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #292941; /* Fond sombre */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+canvas {
+    width: 100%;
+    height: 250px /* Ajusté pour mieux s'intégrer dans les cartes */
+}
+
+/* Informations de résumé */
+.summary-info {
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #292941; /* Fond sombre plus clair */
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Bouton Retour */
+.back-button {
+    margin-top: 30px;
+}
+
+.back-button a {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff; /* Bleu pour le bouton */
+    padding: 12px 24px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.back-button a:hover {
+    background-color: #0056b3; /* Bleu plus foncé au survol */
+}
+
+/* Styles de la modale */
+.modal {
+    display: none; /* Par défaut, la modale est cachée */
+    position: fixed;
+    z-index: 9999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Active le scroll si nécessaire */
+    background-color: rgba(0, 0, 0, 0.8); /* Fond noir translucide */
+}
+
+.modal-content {
+    background-color: #1e1e2f; /* Fond sombre */
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    overflow: auto; /* Pour permettre le défilement à l'intérieur de la modale */
+}
+
+/* Bouton de fermeture de la modale */
+.close-modal {
+    color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #f44336; /* Rouge pour la fermeture */
+}
+
+/* Pour mettre en avant le champion du propriétaire du compte */
+.owner-highlight {
+    border: 2px solid #ffd700; /* Or pour mettre en évidence */
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Styles des sections de la bot lane */
+.bot-lane-section {
+    background-color: #292941; /* Fond sombre plus clair */
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bot-lane-player {
+    margin-bottom: 10px;
+}
+
+.champion-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Styles pour les éléments de l'inventaire */
+.item-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3px;
+}
+
+.item-image {
+    width: 25px;
+    height: 25px;
+    margin: 1px;
+}
+
+/* Cacher les barres de défilement sans désactiver le scrolling */
+body::-webkit-scrollbar {
+    display: none; /* Cache la scrollbar de la page principale */
+}
+
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
