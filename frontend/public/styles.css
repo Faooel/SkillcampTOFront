@@ -1,0 +1,78 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.match-card {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.match-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.match-card p {
+    margin: 5px 0;
+}
+
+.bot-lane-section {
+    margin-top: 15px;
+}
+
+.bot-lane-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.champion-image, .item-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.item-list img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.support-section {
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    .match-card {
+        padding: 15px;
+    }
+    .champion-image, .item-image {
+        width: 48px;
+        height: 48px;
+    }
+}
