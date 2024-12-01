@@ -2,6 +2,7 @@
 async function fetchMatchData() {
     try {
         const response = await fetch('http://localhost:3000/api/matches');
+
         if (!response.ok) {
             throw new Error(`Erreur HTTP ! statut : ${response.status}`);
         }
@@ -84,7 +85,6 @@ function openMatchModal(match, alliedDamage, enemyDamage) {
                             <img class="champion-image-team" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${champion}.png" alt="${champion}">
                         `).join('') ?? ''}
                     </div>
-                    <p><strong>Dégâts totaux de l'ADC de l'équipe :</strong> ${alliedDamage}</p>
                 </div>
                 <div class="team-composition">
                     <h4>Équipe Adverse :</h4>
@@ -93,7 +93,6 @@ function openMatchModal(match, alliedDamage, enemyDamage) {
                             <img class="champion-image-team" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${champion}.png" alt="${champion}">
                         `).join('') ?? ''}
                     </div>
-                    <p><strong>Dégâts totaux de l'ADC de l'équipe :</strong> ${enemyDamage}</p>
                 </div>
             </div>
         </div>
