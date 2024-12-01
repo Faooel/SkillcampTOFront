@@ -1,19 +1,34 @@
-// Fonction pour récupérer les données des matchs via l'API
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+// Initialisation du client Supabase
+const supabaseUrl = 'https://sbqsbhlietaddodamzkt.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNicXNiaGxpZXRhZGRvZGFtemt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI5ODY5NzIsImV4cCI6MjA0ODU2Mjk3Mn0.l6rPXqAPjxYQUgQJLoeohBWaIBc0M7m32yhDSvDISSs';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchMatchData();
+});
+
+// Fonction pour récupérer les données des matchs via Supabase
 async function fetchMatchData() {
     try {
-        const response = await fetch('http://localhost:3000/api/matches');
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+        // Récupérer les données des matchs depuis Supabase
+        const { data, error } = await supabase
+            .from('matches')
+            .select('*')
+            .limit(50);
+
+        if (error) {
+            throw new Error(`Erreur lors de la récupération des données : ${error.message}`);
         }
-        const data = await response.json();
-        console.log("Données récupérées :", data);  // Pour vérifier les données récupérées
+
+        console.log("Données récupérées :", data); // Pour vérifier les données récupérées
 
         // Calculer les statistiques simples et générer les graphiques
         const supportCount = calculateSupportCount(data);
         updateSimpleStats(data, supportCount);
         generateCharts(data, supportCount); // Générer les graphiques après récupération des données
     } catch (error) {
-        console.error("Erreur lors de la récupération des données via l'API :", error);
+        console.error("Erreur lors de la récupération des données via Supabase :", error);
     }
 }
 
@@ -52,10 +67,12 @@ function updateSimpleStats(matches) {
     const bestWinningADC = calculateBestWinningADC(matches);
 
     // Afficher les résultats dans le HTML
-    const top3SupportsElement = document.getElementById("top3Supports");
-    top3SupportsElement.innerHTML = top3Supports.map(([champion, count], index) =>
-        `${index + 1}. ${champion} (${count} matchs)`
-    ).join('<br>');
+    const top3SupportsElement = document.getElementById("mostPlayedSupport");
+    if (top3SupportsElement) {
+        top3SupportsElement.innerHTML = top3Supports.map(([champion, count], index) =>
+            `${index + 1}. ${champion} (${count} matchs)`
+        ).join('<br>');
+    }
 
     document.getElementById("bestWinningADC").innerText = bestWinningADC;
 
@@ -67,10 +84,6 @@ function updateSimpleStats(matches) {
         document.getElementById("averageAssistsMostPlayedSupport").innerText = 'Non disponible';
     }
 }
-
-// Appeler les fonctions pour récupérer les données quand la page est chargée
-document.addEventListener("DOMContentLoaded", fetchMatchData);
-
 
 // Fonction pour compter les supports joués
 function calculateSupportCount(matches) {
@@ -87,52 +100,6 @@ function calculateSupportCount(matches) {
     });
     return supportCount;
 }
-
-function updateSimpleStats(matches) {
-    let supportCount = {};
-
-    matches.forEach(match => {
-        // Compter les supports joués
-        match.match_data?.bot_lanes?.allied.forEach(player => {
-            if (player.role === 'Support') {
-                if (!supportCount[player.champion]) {
-                    supportCount[player.champion] = 0;
-                }
-                supportCount[player.champion]++;
-            }
-        });
-    });
-
-    // Trouver les trois supports les plus joués
-    const topSupports = Object.entries(supportCount)
-        .sort((a, b) => b[1] - a[1]) // Trier par nombre de matchs joués, du plus grand au plus petit
-        .slice(0, 3); // Récupérer les trois premiers
-
-    // Mettre à jour le HTML avec les nouvelles statistiques
-    const topSupportsElement = document.getElementById("mostPlayedSupport");
-    if (topSupportsElement) {
-        topSupportsElement.innerHTML = topSupports
-            .map(([champion], index) => `${index + 1}. ${champion}`)
-            .join('<br>');
-    }
-
-    // Calculer l'ADC avec lequel il a le plus gagné
-    const bestWinningADC = calculateBestWinningADC(matches);
-    const bestWinningADCElement = document.getElementById("bestWinningADC");
-    if (bestWinningADCElement) {
-        bestWinningADCElement.innerText = bestWinningADC;
-    }
-
-    // Calculer l'assistance moyenne du support le plus joué
-    if (topSupports.length > 0) {
-        const averageAssistsMostPlayedSupport = calculateAverageAssistsMostPlayedSupport(matches, topSupports[0][0]);
-        const averageAssistsElement = document.getElementById("averageAssistsMostPlayedSupport");
-        if (averageAssistsElement) {
-            averageAssistsElement.innerText = averageAssistsMostPlayedSupport;
-        }
-    }
-}
-
 
 // Fonction pour calculer l'ADC avec lequel il a remporté le plus de matchs
 function calculateBestWinningADC(matches) {
@@ -200,12 +167,12 @@ function generateCharts(matches, supportCount) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true, // Garder le ratio d'aspect pour éviter l'agrandissement vertical
+            maintainAspectRatio: true,
             plugins: {
                 legend: {
                     position: 'top',
                     labels: {
-                        color: '#ffffff' // Couleur du texte de la légende
+                        color: '#ffffff'
                     }
                 },
                 title: {
@@ -234,7 +201,7 @@ function generateCharts(matches, supportCount) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true, // Garder le ratio d'aspect pour éviter l'agrandissement vertical
+            maintainAspectRatio: true,
             plugins: {
                 legend: {
                     display: false
@@ -260,7 +227,3 @@ function generateCharts(matches, supportCount) {
         }
     });
 }
-
-
-// Appeler les fonctions pour récupérer les données quand la page est chargée
-document.addEventListener("DOMContentLoaded", fetchMatchData);

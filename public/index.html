@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
 <head>
+<html lang="fr">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Récapitulatif des Statistiques</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <link rel="stylesheet" href="cssIndex.css">
 </head>
 <body>
@@ -36,9 +37,8 @@
         </div>
     </div>
 
-    <!-- Inclure le script Chart.js et un script personnalisé -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/frontend/src/stats.js"></script>
+    <script type="module" src="../src/stats.js"></script>
 
 </body>
 </html>

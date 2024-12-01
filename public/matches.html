@@ -1,50 +1,52 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match Details</title>
+    <title>Match Data</title>
+    <!-- Lien CDN pour charger le client Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <!-- Lien vers le fichier CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <!-- En-tête de la page -->
     <div class="container">
-        <!-- Carte principale avec les informations globales -->
-        <div class="main-card">
-            <h1>Résumé des 50 derniers matchs de Rekkles</h1>
+        <div class="page-header"><h1>Résumé des 50 derniers matchs de Rekkles</h1>
             <p>Cette page regroupe les 50 derniers matchs de Rekkles sur le compte Doma#1996</p>
         </div>
 
         <!-- Tableau des matchs -->
-        <table id="matchTable" class="match-table">
-            <thead>
-                <tr>
-                    <th>Partie</th>
-                    <th>Personnage joué</th>
-                    <th>Date de la partie</th>
-                    <th>Durée</th>
-                    <th>Mode de jeu</th>
-                    <th>Résultat</th>
-                </tr>
-            </thead>
-            <tbody id="matchTableBody"></tbody>
-        </table>
-
-        <!-- Modale pour les détails du match -->
-        <div id="matchModal" class="modal">
-            <div class="modal-content">
-                <span id="closeModal" class="close">&times;</span>
-                <div id="modalMatchDetails"></div>
-            </div>
+        <div class="main-card">
+            <table class="match-table">
+                <thead>
+                    <tr>
+                        <th>Partie</th>
+                        <th>Champion</th>
+                        <th>Date</th>
+                        <th>Durée</th>
+                        <th>Mode</th>
+                        <th>Résultat</th>
+                    </tr>
+                </thead>
+                <tbody id="matchTableBody"></tbody>
+            </table>
         </div>
     </div>
 
-            <div class="back-button">
+    <!-- Modale pour les détails du match -->
+    <div id="matchModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <div id="modalMatchDetails"></div>
+        </div>
+    </div>
+
+                <div class="back-button">
             <a href="index.html">Voir les stats en vrac</a>
         </div>
 
-    <!-- Inclure le fichier JavaScript externe -->
-    <script src="/frontend/src/script.js"></script>
-
+    <!-- Inclure votre script JS -->
+    <script type="module" src="/src/script.js"></script>
 </body>
 </html>
